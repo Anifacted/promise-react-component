@@ -1,0 +1,24 @@
+{
+  "name": "promise-react-component",
+  "version": "0.0.1",
+  "description":
+    "A utility React component that renders its contents based on lifecycle state of a specified Promise",
+  "main": "index.js",
+  "author": "Marc Høegh <mhoegh90@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "repository": "https://github.com/Anifacted/promise-react-component",
+  "peerDependencies": {
+    "prop-types": "^15",
+    "react": "^15 || ^16"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "scripts": {
+    "prepublish": "yarn build",
+    "build": "babel --out-dir lib --quiet src"
+  }
+}
