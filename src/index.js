@@ -33,17 +33,17 @@ class PromiseComponent extends Component {
   };
 
   render() {
-    const { status, error } = this.state;
+    const { status, error, result } = this.state;
     const { resolved, rejected, pending, ...props } = this.props;
 
     switch (status) {
       case "resolved":
         return typeof resolved === "function"
-          ? React.createElement(resolved, props)
+          ? React.createElement(resolved, { result, props })
           : resolved;
       case "rejected":
         return typeof rejected === "function"
-          ? React.createElement(rejected, error)
+          ? React.createElement(rejected, { error })
           : rejected;
       default:
         return typeof pending === "function"
