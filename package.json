@@ -1,6 +1,6 @@
 {
   "name": "promise-react-component",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A utility React component that renders its contents based on lifecycle state of a specified Promise",
   "main": "lib/index.js",
   "author": "Marc Høegh <mhoegh90@gmail.com>",
