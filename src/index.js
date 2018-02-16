@@ -5,20 +5,32 @@ class PromiseComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      status: "pending",
-      result: undefined,
-      error: undefined
-    };
+    this.state = { status: "pending", result: undefined, error: undefined };
   }
+
+  attachPromise = promise => {
+    const onSuccess = result =>
+      new Promise(resolve =>
+        this.setState({ status: "resolved", result }, resolve)
+      );
+
+    const onError = error =>
+      new Promise((undefined, reject) =>
+        this.setState({ status: "rejected", error }, () => reject(error))
+      );
+
+    promise.then(onSuccess).catch(onError);
+  };
 
   componentDidMount() {
-    const { promise } = this.props;
-
-    promise
-      .then(result => this.setState({ status: "resolved", result }))
-      .catch(error => this.setState({ status: "rejected", error }));
+    this.attachPromise(this.props.promise);
   }
+
+  componentWillReceiveProps = ({ promise: nextPromise }) => {
+    if (this.props.promise === nextPromise) return;
+
+    this.setState({ status: "pending" }, () => this.attachPromise(nextPromise));
+  };
 
   render() {
     const { status, error } = this.state;
